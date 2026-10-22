@@ -13,7 +13,7 @@
   "out_tilevborder":2,
   "parent":{
     "name":"Tiles",
-    "path":"folders/Global/Tiles.yy",
+    "path":"folders/Global/Sprite/Tiles.yy",
   },
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",

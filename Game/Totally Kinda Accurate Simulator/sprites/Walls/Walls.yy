@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Tiles",
-    "path":"folders/Global/Tiles.yy",
+    "path":"folders/Global/Sprite/Tiles.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

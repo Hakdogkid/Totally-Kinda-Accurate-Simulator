@@ -10,8 +10,8 @@
   "name":"Par_enemy",
   "overriddenProperties":[],
   "parent":{
-    "name":"Global",
-    "path":"folders/Global.yy",
+    "name":"Parent",
+    "path":"folders/Global/Parent.yy",
   },
   "parentObjectId":null,
   "persistent":false,
