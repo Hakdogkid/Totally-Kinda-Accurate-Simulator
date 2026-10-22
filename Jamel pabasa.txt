@@ -1,0 +1,5 @@
+-32x32 ung Pixel sprites na gagamitin mo
+-Palagay nalang ng entity mo sa GML file, gawa ka nalang ng folder na may naming scheme na [Surname_EntityName]
+-Inspiration for room na gagawin ko is TABS (game)
+-Global Folder is for parents and global variables na gagamitin. Ung folder na gagawin mo is sa entity only and ung magiging interaction nya sa entity ko
+
