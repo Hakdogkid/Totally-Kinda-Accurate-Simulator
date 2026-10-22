@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"StateManagement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"StateManagement",
+  "parent":{
+    "name":"Script",
+    "path":"folders/pagulayan_Dayling/Script.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

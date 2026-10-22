@@ -12,7 +12,10 @@
     "name":"objects",
     "path":"folders/pagulayan_Dayling/objects.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"Par_enemy",
+    "path":"objects/Par_enemy/Par_enemy.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
