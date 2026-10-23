@@ -1,4 +1,4 @@
-hp=20
-energy=15
+hp=10
+energy=18
 spd=2
 atk=2
