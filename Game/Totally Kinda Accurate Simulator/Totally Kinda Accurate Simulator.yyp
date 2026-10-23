@@ -12,6 +12,7 @@
   "Folders":[
     {"$GMFolder":"","%Name":"Global","folderPath":"folders/Global.yy","name":"Global","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Parent","folderPath":"folders/Global/Parent.yy","name":"Parent","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Room","folderPath":"folders/Global/Room.yy","name":"Room","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Sprite","folderPath":"folders/Global/Sprite.yy","name":"Sprite","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Tiles","folderPath":"folders/Global/Sprite/Tiles.yy","name":"Tiles","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"moquiring","folderPath":"folders/moquiring.yy","name":"moquiring","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -30,6 +31,7 @@
   "name":"Totally Kinda Accurate Simulator",
   "resources":[
     {"id":{"name":"obj_dayling","path":"objects/obj_dayling/obj_dayling.yy",},},
+    {"id":{"name":"Obj_Food","path":"objects/Obj_Food/Obj_Food.yy",},},
     {"id":{"name":"Obj_FoodSpawn","path":"objects/Obj_FoodSpawn/Obj_FoodSpawn.yy",},},
     {"id":{"name":"Obj_Spawner","path":"objects/Obj_Spawner/Obj_Spawner.yy",},},
     {"id":{"name":"Obj_SpawnerP2","path":"objects/Obj_SpawnerP2/Obj_SpawnerP2.yy",},},
