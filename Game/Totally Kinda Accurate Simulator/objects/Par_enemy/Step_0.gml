@@ -6,7 +6,8 @@ if (!dead) {
     }
 
     if (hp <= 0 or energy <= 0) {
-        
+		hp=0
+		energy=0
         sprite_index = Dayling_Death
         image_index = 0
         image_speed = 1
