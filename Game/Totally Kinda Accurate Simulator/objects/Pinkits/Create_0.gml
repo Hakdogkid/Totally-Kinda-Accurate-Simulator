@@ -22,7 +22,7 @@ spr_idle  = Pinkits_Idle;        // animation when standing still
 spr_walk  = Pinkits_Walk;        // animation when moving
 spr_arrow = Pinkits_Arrow;       // projectile sprite (points RIGHT at 0 degrees)
 
-base_scale          = 0.5;       // sprites are 64x64; 0.5 makes the Pinkit fit a 32x32 frame like the Daylings
+base_scale          = 1;       // sprites 32x32 frame like the Daylings
 arrow_scale         = 0.5;       // arrow size
 arrow_anim_speed    = 0.25;      // arrow animation frames per step (ignored if 1 frame)
 flip_with_direction = true;      // flip body sprite left/right

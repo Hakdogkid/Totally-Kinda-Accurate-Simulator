@@ -2,7 +2,7 @@
 // Doesn't change Obj_Spawner / Obj_SpawnerP2 / Obj_FoodSpawn: it only reads where
 // they are placed in the room.
 
-start_per_spawner = 2;            // Pinkits spawned at each Obj_SpawnerP2 on room start
+start_per_spawner = 1;            // Pinkits spawned at each Obj_SpawnerP2 on room start
 
 // ----- Food top-up (set to false if the food spawner gets its own code later) -----
 food_enabled = true;
