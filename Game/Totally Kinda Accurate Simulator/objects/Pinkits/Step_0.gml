@@ -106,7 +106,30 @@ if (_target != noone)
     _dist = point_distance(_cx, _cy, _tx, _ty);
 }
 
-var _food = instance_nearest(_cx, _cy, food_obj);
+// ----- Food claim -----
+// Give up on our food if it's gone, or if another Pinkit claimed it before us.
+if (food_target != noone && !instance_exists(food_target)) food_target = noone;
+
+if (food_target != noone)
+{
+    var _me   = id;
+    var _ft   = food_target;
+    var _mine = claim_time;
+    var _lost = false;
+    with (Pinkits)
+    {
+        if (id != _me && food_target == _ft && (claim_time < _mine || (claim_time == _mine && id < _me)))
+        {
+            _lost = true;
+        }
+    }
+    if (_lost) food_target = noone;
+}
+
+// Our claimed food, or else the nearest food nobody else is heading for
+var _food = food_target;
+if (_food == noone) _food = find_free_food();
+
 var _fx = 0, _fy = 0;
 if (_food != noone)
 {
@@ -116,6 +139,7 @@ if (_food != noone)
 
 var _well_fed = (energy >= hunt_energy && food_held >= hunt_food);
 var _go = false;     // do we have somewhere to walk this frame?
+var _seeking = false; // are we walking to food this frame?
 var _face_x = 0;     // which way to look (if combat)
 
 if (_dist <= sight_range)
@@ -160,6 +184,12 @@ else if (_well_fed && _target != noone)
 else if (energy < max_energy && _food != noone)
 {
     // Hungry: go eat (touching Obj_Food triggers its collision event)
+    _seeking = true;
+    if (food_target != _food)
+    {
+        food_target = _food;          // claim it so other Pinkits go elsewhere
+        claim_time  = current_time;
+    }
     goal_x = _fx;
     goal_y = _fy;
     _go = true;
@@ -177,12 +207,39 @@ else
     _go = true;
 }
 
+if (!_seeking) food_target = noone;   // not chasing food: let others have it
+
 // ===================== MOVEMENT (walks around walls like the Daylings) =====================
 var _ox = x, _oy = y;
+var _was_overlapping = (instance_place(x, y, object_index) != noone);   // e.g. just born on top of someone
+
 if (_go)
 {
     mp_potential_step_object(goal_x, goal_y, spd, wall_obj);
 }
+
+// Never walk INTO another Pinkit: slide along one axis, or stay put
+if (!_was_overlapping && blocked_at(x, y))
+{
+    var _nx = x, _ny = y;
+    if (!blocked_at(_nx, _oy))      { x = _nx; y = _oy; }
+    else if (!blocked_at(_ox, _ny)) { x = _ox; y = _ny; }
+    else                            { x = _ox; y = _oy; }
+}
+
+// Already overlapping someone: push apart until free
+if (_was_overlapping)
+{
+    var _o = instance_place(x, y, object_index);
+    if (_o != noone)
+    {
+        var _d  = (_o.x == x && _o.y == y) ? irandom(359) : point_direction(_o.x, _o.y, x, y);
+        var _px = x + lengthdir_x(2, _d);
+        var _py = y + lengthdir_y(2, _d);
+        if (!place_meeting(_px, _py, wall_obj)) { x = _px; y = _py; }
+    }
+}
+
 moving = (x != _ox || y != _oy);
 if (_go && !moving) wander_timer = 0;   // stuck: pick a new spot next frame
 
@@ -212,15 +269,20 @@ for (var i = array_length(bullets) - 1; i >= 0; i--)
     _b.life--;
     _b.frame += arrow_anim_speed;
 
-    var _hit = collision_circle(_b.bx, _b.by, 4, enemy_obj, false, true);
-    if (_hit != noone && !_hit.dead)
+    // The whole arrow (tail to tip) is tested, so it disappears the moment it touches something
+    var _hx = lengthdir_x(arrow_half_len, _b.dir);
+    var _hy = lengthdir_y(arrow_half_len, _b.dir);
+    var _hit = collision_line(_b.bx - _hx, _b.by - _hy, _b.bx + _hx, _b.by + _hy, enemy_obj, false, true);
+
+    if (_hit != noone)
     {
-        _hit.hp -= bullet_damage;        // Par_enemy's Step handles the death
+        // only hurts if the enemy is still alive; the arrow is used up either way
+        if (!_hit.dead) _hit.hp -= bullet_damage;   // Par_enemy's Step handles the death
         array_delete(bullets, i, 1);
     }
     else if (_b.life <= 0
           || _b.bx < 0 || _b.bx > room_width || _b.by < 0 || _b.by > room_height
-          || collision_point(_b.bx, _b.by, wall_obj, false, true) != noone)
+          || collision_line(_b.bx - _hx, _b.by - _hy, _b.bx + _hx, _b.by + _hy, wall_obj, false, true) != noone)
     {
         array_delete(bullets, i, 1);
     }
