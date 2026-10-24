@@ -1,3 +1,5 @@
+randomize()
+
 // ===================== FOOD SPAWNER SETTINGS =====================
 start_amount    = 5;   // food dropped when the room starts
 amount_per_wave = 3;    // <-- HOW MUCH FOOD spawns each wave
@@ -34,7 +36,7 @@ spawn_food = function(_count)
             _px = clamp(_px, 48, room_width  - 80);
             _py = clamp(_py, 48, room_height - 80);
 
-            if (collision_rectangle(_px, _py, _px + 32, _py + 32, Obj_wall, false, true) != noone) continue;
+            if (collision_rectangle(_px - 16, _py - 16, _px + 16, _py + 16, Obj_wall, false, true) != noone) continue;
 
             instance_create_layer(_px, _py, "Instances", Obj_Food);
             break;

@@ -6,6 +6,7 @@ spd=2
 atk=2
 hunger_timer = 0
 
+can_eat = true
 
 
 //States

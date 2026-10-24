@@ -9,8 +9,8 @@
   "name":"Obj_FoodSpawn",
   "overriddenProperties":[],
   "parent":{
-    "name":"Global",
-    "path":"folders/Global.yy",
+    "name":"Objects",
+    "path":"folders/Global/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

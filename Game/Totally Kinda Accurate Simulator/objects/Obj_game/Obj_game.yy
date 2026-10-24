@@ -1,13 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"PlaceHolder",
+  "%Name":"Obj_game",
   "eventList":[],
   "managed":true,
-  "name":"PlaceHolder",
+  "name":"Obj_game",
   "overriddenProperties":[],
   "parent":{
-    "name":"moquiring",
-    "path":"folders/moquiring.yy",
+    "name":"Objects",
+    "path":"folders/Global/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -27,10 +27,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"Sprite9",
-    "path":"sprites/Sprite9/Sprite9.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }
