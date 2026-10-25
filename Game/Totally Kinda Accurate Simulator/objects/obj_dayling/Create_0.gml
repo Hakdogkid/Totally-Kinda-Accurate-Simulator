@@ -17,14 +17,14 @@ atk = 5
 
 //grrr
 enemy_obj = Pinkits
-attack_range = 36
+attack_range = 33
 attacking = false
 attack_cd = 0
 attack_hitbox = noone
 facing = 1
 
 //state management akin to script
-sight_range = 400
+sight_range = 300
 hungry_energy = 8
 state = DayState.FORAGE
 recover_energy = 14
