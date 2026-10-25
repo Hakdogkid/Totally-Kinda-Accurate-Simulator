@@ -9,8 +9,9 @@ Multiplier - With 10 food and 5 energy, spawn 1-2 offspring.
 
 Child of Par_enemy, so Pinkits share the base stats (hp 10, energy 18, spd 2) and eat
 Obj_Food the same way the Daylings do (the food's collision event gives +5 energy).
-Pinkits use their own Step: Par_enemy's Step kills instantly at 0 energy and plays
-Dayling_Death, but the lab rules say a starving entity takes damage instead.
+Like the Daylings, a Pinkit dies as soon as its energy reaches 0.
+Pinkits use their own Step because Par_enemy's Step plays Dayling_Death, and Pinkits
+have no death animation (they just disappear).
 */
 
 event_inherited();   // hp = max_hp = 10, energy/max_energy = 18, spd = 2, hunger_timer, dead
@@ -51,7 +52,6 @@ prev_hp     = hp;                // used to detect any damage (Spiny)
 energy      = 10;                // start a bit hungry so they go looking for food
 prev_energy = energy;            // used to detect eating
 hunger_delay = game_get_speed(gamespeed_fps);   // same rate as Par_enemy: -1 energy per second
-starve_timer = 0;                // at 0 energy: -1 hp per second (lab rule)
 
 // ---------- Food ----------
 food_held = 0;                   // bites eaten, saved up for the Multiplier
@@ -74,7 +74,6 @@ reload_time   = fps_val * 2;
 reload_timer  = 0;
 reloading     = false;
 shoot_range   = 160;
-keep_distance = 70;
 sight_range   = 220;
 
 // ---------- TRAIT: MULTIPLIER ----------

@@ -62,23 +62,18 @@ if (hunger_timer >= hunger_delay)
     energy = max(0, energy - 1);
 }
 
+// No energy left = the Pinkit dies (same rule as the Daylings)
 if (energy <= 0)
 {
-    starve_timer++;
-    if (starve_timer >= fps_val)
-    {
-        starve_timer = 0;
-        hp -= 1;
-        hit_flash = flash_time;   // flash on starvation too (no Spiny reaction)
-    }
-}
-else
-{
-    starve_timer = 0;
+    energy = 0;
+    hp     = 0;
+    dead   = true;
+    instance_destroy();
+    exit;
 }
 
 // ===================== MULTIPLIER =====================
-if (food_held >= repro_food_cost && energy >= repro_energy_cost
+if (food_held >= repro_food_cost && energy > repro_energy_cost
     && repro_cd <= 0 && instance_number(object_index) < pop_cap)
 {
     food_held -= repro_food_cost;
@@ -144,17 +139,12 @@ var _face_x = 0;     // which way to look (if combat)
 
 if (_dist <= sight_range)
 {
-    // ---------- COMBAT (ranged kiting) ----------
+    // ---------- COMBAT ----------
     var _to_enemy = point_direction(_cx, _cy, _tx, _ty);
     _face_x = _tx - _cx;
 
-    if (_dist < keep_distance)          // too close: back away
-    {
-        goal_x = x + lengthdir_x(96, _to_enemy + 180);
-        goal_y = y + lengthdir_y(96, _to_enemy + 180);
-        _go = true;
-    }
-    else if (_dist > shoot_range)       // too far: close the gap
+    // Out of range: walk closer. In range: stand still and shoot (no moving, no backing away).
+    if (_dist > shoot_range)
     {
         goal_x = _tx;
         goal_y = _ty;
@@ -289,6 +279,6 @@ for (var i = array_length(bullets) - 1; i >= 0; i--)
 }
 
 // Remember values for next frame's detection
-// (hunger/starvation are applied above, so they won't trigger Spiny or count as eating)
+// (hunger is applied above, so it won't trigger Spiny or count as eating)
 prev_hp     = hp;
 prev_energy = energy;
