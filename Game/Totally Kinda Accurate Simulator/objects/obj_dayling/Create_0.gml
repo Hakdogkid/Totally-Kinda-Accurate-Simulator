@@ -11,6 +11,7 @@ Tanky -Your civilization/entities have a base 20 hp each
 
 //Base Stats ng Daylings
 event_inherited()
+mask_index = Dayling_Idle
 hp = 20
 max_hp = 20
 atk = 5

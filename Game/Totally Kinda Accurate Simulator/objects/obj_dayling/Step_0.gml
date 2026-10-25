@@ -38,7 +38,7 @@ else {
 
 can_eat = (state != DayState.HUNT)
 
-mp_potential_settings(180, 10, 10, true)
+mp_potential_settings(30, 10, 10, true)
 
 switch (state) {
 
