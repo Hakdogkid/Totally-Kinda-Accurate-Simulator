@@ -10,7 +10,7 @@ if (attacking) {
 }
 
 var target = instance_nearest(x, y, enemy_obj)
-var target_dist = 99999
+var target_dist = infinity
 if (target != noone) {
     target_dist = point_distance(x, y, target.x, target.y)
 }
@@ -27,7 +27,7 @@ if (energy < hungry_energy and food != noone) {
     state = DayState.HUNGRY
 }
 else if (state == DayState.HUNGRY and energy < recover_energy and food != noone) {
-
+	// still recovering, keep eating bascally
 }
 else if (target != noone and target_dist <= sight_range) {
     state = DayState.HUNT
