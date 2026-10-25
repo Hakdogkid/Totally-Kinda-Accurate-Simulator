@@ -28,4 +28,3 @@ sight_range = 300
 hungry_energy = 8
 state = DayState.FORAGE
 recover_energy = 14
-hunt_spd = 2.5

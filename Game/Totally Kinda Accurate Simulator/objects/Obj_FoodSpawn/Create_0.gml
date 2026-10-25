@@ -1,10 +1,10 @@
 randomize()
 
 // ===================== FOOD SPAWNER SETTINGS =====================
-start_amount    = 5;   // food dropped when the room starts
-amount_per_wave = 3;    // <-- HOW MUCH FOOD spawns each wave
-wave_seconds    = 5;    // seconds between waves
-max_food        = 10;   // never more than this many Obj_Food in the room at once
+start_amount    = 6;   // food dropped when the room starts
+amount_per_wave = 5;    // <-- HOW MUCH FOOD spawns each wave
+wave_seconds    = 6;    // seconds between waves
+max_food        = 15;   // never more than this many Obj_Food in the room at once
 spawn_radius    = 250;    // 0 = anywhere in the room, or e.g. 300 = within 300 px of this spawner
 // =================================================================
 

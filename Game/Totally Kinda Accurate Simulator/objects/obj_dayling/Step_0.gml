@@ -38,6 +38,8 @@ else {
 
 can_eat = (state != DayState.HUNT)
 
+mp_potential_settings(180, 10, 10, true)
+
 switch (state) {
 
     case DayState.HUNGRY:
@@ -58,18 +60,21 @@ switch (state) {
         facing = (target.x >= x) ? 1 : -1
 
         if (target_dist > attack_range) {
-            mp_potential_step_object(target.x, target.y, hunt_spd, Obj_wall)
+            mp_potential_step_object(target.x, target.y, spd, Obj_wall)
             sprite_index = Dayling_Running
         }
         else if (attack_cd <= 0) {
             attacking = true
             attack_cd = game_get_speed(gamespeed_fps)
             sprite_index = Dayling_Attack
+			
+			attack_hitbox = instance_create_layer(x, y, layer, obj_DaylingHit)
+            attack_hitbox.owner = id
+			
             image_index = 0
             image_speed = 1
 
-            attack_hitbox = instance_create_layer(x, y, layer, obj_DaylingHit)
-            attack_hitbox.owner = id
+
         }
         else {
             sprite_index = Dayling_Idle
