@@ -86,8 +86,8 @@ if (food_held >= repro_food_cost && energy > repro_energy_cost
         var _baby = instance_create_layer(x + irandom_range(-16, 16),
                                           y + irandom_range(-16, 16),
                                           layer, object_index);
-        _baby.energy      = 5;
-        _baby.prev_energy = 5;
+        _baby.energy      = newborn_energy;
+        _baby.prev_energy = newborn_energy;
     }
 }
 
@@ -186,12 +186,23 @@ else if (energy < max_energy && _food != noone)
 }
 else
 {
-    // Wander to random spots
+    // Idle: wander, but not across the whole map (that walks straight into the Daylings).
     wander_timer--;
     if (wander_timer <= 0 || point_distance(_cx, _cy, goal_x, goal_y) < 24)
     {
-        goal_x = irandom_range(64, room_width  - 64);
-        goal_y = irandom_range(64, room_height - 64);
+        var _ax = home_x;
+        var _ay = home_y;
+
+        // Hungry with no free food: wait on OUR side of the food spawner, ready for the next wave
+        if (energy < max_energy && instance_exists(Obj_FoodSpawn))
+        {
+            var _fs = instance_nearest(_cx, _cy, Obj_FoodSpawn);
+            _ax = _fs.x + sign(home_x - _fs.x) * wander_radius;
+            _ay = _fs.y;
+        }
+
+        goal_x = clamp(_ax + irandom_range(-wander_radius, wander_radius), 64, room_width  - 64);
+        goal_y = clamp(_ay + irandom_range(-wander_radius, wander_radius), 64, room_height - 64);
         wander_timer = irandom_range(120, 240);
     }
     _go = true;

@@ -17,6 +17,18 @@ have no death animation (they just disappear).
 event_inherited();   // hp = max_hp = 10, energy/max_energy = 18, spd = 2, hunger_timer, dead
 
 // =====================================================
+//  BALANCE SETTINGS: tweak these to tune the Pinkits
+// =====================================================
+start_energy   = max_energy;     // was 10: a full belly gives them time to find food (Daylings also start full)
+hunger_seconds = 2;              // seconds to lose 1 energy (Daylings: 1). Small bodies burn energy slower.
+newborn_energy = 9;              // babies used to start with 5 and starved almost immediately
+shoot_range    = 200;            // was 160: more free shots while a Dayling walks up
+sight_range    = 300;            // was 220: they now notice enemies as far away as the Daylings do
+hunt_energy    = 15;             // only go hunting when very well fed (was 12)...
+hunt_food      = 6;              // ...and after eating this many bites (was 3). Hunting alone = dying.
+wander_radius  = 160;            // idle Pinkits stay this close to their spawn spot instead of crossing the map
+
+// =====================================================
 //  SPRITES: swap these anytime (all sprites face RIGHT, origin Middle Center)
 // =====================================================
 spr_idle  = Pinkits_Idle;        // animation when standing still
@@ -49,9 +61,9 @@ wall_obj  = Obj_wall;            // walls to path around
 
 // ---------- Mortal / Hunger (base values come from Par_enemy) ----------
 prev_hp     = hp;                // used to detect any damage (Spiny)
-energy      = 10;                // start a bit hungry so they go looking for food
+energy      = start_energy;      // spawn with a full belly (see BALANCE SETTINGS)
 prev_energy = energy;            // used to detect eating
-hunger_delay = game_get_speed(gamespeed_fps);   // same rate as Par_enemy: -1 energy per second
+hunger_delay = game_get_speed(gamespeed_fps) * hunger_seconds;   // slower than Par_enemy's 1 second
 
 // ---------- Food ----------
 food_held = 0;                   // bites eaten, saved up for the Multiplier
@@ -73,8 +85,6 @@ ammo          = ammo_max;
 reload_time   = fps_val * 2;
 reload_timer  = 0;
 reloading     = false;
-shoot_range   = 160;
-sight_range   = 220;
 
 // ---------- TRAIT: MULTIPLIER ----------
 pop_cap           = 30;          // max Pinkits alive at once
@@ -84,11 +94,12 @@ repro_delay       = fps_val * 3;
 repro_cd          = 0;
 
 // ---------- AI ----------
-hunt_energy  = 12;               // well fed (energy and food) = go hunt Daylings
-hunt_food    = 3;
+// (hunt_energy / hunt_food: well fed = go hunt Daylings, set in BALANCE SETTINGS)
 wander_timer = 0;
 goal_x       = x;
 goal_y       = y;
+home_x       = x;                // where we spawned: idle wandering stays around here
+home_y       = y;
 
 // Food claims: a Pinkit "claims" the food it is walking to, so others pick a different one
 food_target = noone;             // the food we are pathing to
